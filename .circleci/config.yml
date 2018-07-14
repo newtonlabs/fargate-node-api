@@ -40,11 +40,11 @@ jobs:
       # build the container
       - run: make build
 
-      # push the container
-      - run: make push
-
       # login to Docker
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      # push the container
+      - run: make push
 
       # deploy to DEV
       - run:
