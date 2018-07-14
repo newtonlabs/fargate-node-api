@@ -13,7 +13,7 @@ app.use(bodyParser.json({
 }));
 
 app.get('/', function(req, res, next) {
-  res.json({'msg': 'Hello from the Node API deployed! --version from circle'})
+  res.json({'msg': 'Hello from the Node API deployed! --version from circle 2'})
 })
 
 app.listen(PORT, HOST);

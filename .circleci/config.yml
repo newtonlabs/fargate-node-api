@@ -53,10 +53,8 @@ jobs:
           working_directory: /
           command: |
             sudo apt-get -y -qq update
-            sudo apt-get -y -qq install python3.4-dev
-            sudo curl -O https://bootstrap.pypa.io/get-pip.py
-            sudo python3.4 get-pip.py --user
-            sudo pip install awscli --upgrade --user
+            sudo apt-get install python-pip python-dev jq
+            sudo pip install awscli
 
       # Issue Command
       - run: make deploy
