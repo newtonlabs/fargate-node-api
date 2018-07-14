@@ -43,6 +43,9 @@ jobs:
       # push the container
       - run: make push
 
+      # login to Docker
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+
       # deploy to DEV
       - run:
           name: Install aws cli
