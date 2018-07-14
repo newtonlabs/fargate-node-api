@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const PORT = 8080;
-const HOST = 'localhost';
+const HOST = '0.0.0.0';
 const DEFAULT_COLORS = ['RED', 'GREEN', 'BLUE'];
 
 const app = express();
