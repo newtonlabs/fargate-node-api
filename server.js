@@ -1,41 +1,42 @@
-// 'use strict';
-//
-// const express = require('express');
-// const http = require('http');
-//
-// // Constants
-// const PORT = 8080;
-// const HOST = '0.0.0.0';
-//
-// // App
-// const app = express();
-// app.get('/', (req, res) => {
-//   res.setHeader('Content-Type', 'application/json');
-//   res.send(JSON.stringify({"msg": "Hello from the Node API"}));
-// });
-//
-// app.listen(PORT, HOST);
-//
-// console.log(`Running on http://${HOST}:${PORT}`);
-//
-// module.exports = app;
-//
+'use strict';
 
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
-let port = 8080;
+const express = require('express');
+const bodyParser = require('body-parser');
 
+const PORT = 8080;
+const HOST = 'localhost';
+const DEFAULT_COLORS = ['RED', 'GREEN', 'BLUE'];
 
-//parse application/json and look for raw text
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/json'}));
+const app = express();
 
-app.get("/", (req, res) => res.json({message: "Welcome to our Bookstore!"}));
+app.use(bodyParser.json({
+  limit: '100k',
+}));
 
-app.listen(port);
-console.log("Listening on port " + port);
+/**
+ * Array holding color values
+ */
+let colors = [].concat(DEFAULT_COLORS);
 
-module.exports = app; // for testing
+/**
+ * Returns a list of colors
+ * Response body (JSON): {results: [....]}
+ */
+app.get('/colors', function(req, res, next) {
+  res.json({
+    results: colors
+  });
+});
+
+app.get('/', function(req, res, next) {
+  res.json({'msg': 'Hello from the Node API'})
+})
+
+app.listen(PORT, HOST);
+
+console.log('Listening on http://%s:%d', HOST || '*', PORT);
+
+/**
+ * Export the Express app so that it can be used by Chai
+ */
+module.exports = app;
