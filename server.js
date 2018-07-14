@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
-const DEFAULT_COLORS = ['RED', 'GREEN', 'BLUE'];
 
 const app = express();
 
@@ -13,23 +12,8 @@ app.use(bodyParser.json({
   limit: '100k',
 }));
 
-/**
- * Array holding color values
- */
-let colors = [].concat(DEFAULT_COLORS);
-
-/**
- * Returns a list of colors
- * Response body (JSON): {results: [....]}
- */
-app.get('/colors', function(req, res, next) {
-  res.json({
-    results: colors
-  });
-});
-
 app.get('/', function(req, res, next) {
-  res.json({'msg': 'Hello from the Node API'})
+  res.json({'msg': 'Hello from the Node API deployed!'})
 })
 
 app.listen(PORT, HOST);
