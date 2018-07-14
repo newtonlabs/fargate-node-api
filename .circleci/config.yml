@@ -51,3 +51,6 @@ jobs:
           name: Install aws cli
           command:
             sudo apt-get -y -qq install awscli
+
+      # Issue Command
+      - run: make deploy
