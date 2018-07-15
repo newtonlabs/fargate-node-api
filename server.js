@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const request = require('request-promise');
 
 const PORT = 8080;
-const RULES_ADDR = 'http://localhost';
-const RULES_PORT = 8000;
+const RULES_ADDR = 'http://rules.service';
+const RULES_PORT = 8080;
 const HOST = '0.0.0.0';
 const TIMEOUT = 1500;
 
