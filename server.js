@@ -14,7 +14,7 @@ app.use(bodyParser.json({
   limit: '100k',
 }));
 
-app.get('/', function(req, res, next) {
+app.get('/hello', function(req, res, next) {
   res.json({'msg': 'Hello from the Node API'})
 });
 

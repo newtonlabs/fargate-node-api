@@ -4,7 +4,7 @@ IMAGE_NAME ?= fargate-node-api
 CONTAINER_INSTANCE ?= default
 PORTS ?= -p 8080:8080
 CLUSTER_NAME ?= POC-DEV-cluster
-SERVICE_NAME ?= POC-DEV-rules
+SERVICE_NAME ?= POC-DEV-api
 
 .PHONY: build build-arm push push-arm shell shell-arm run run-arm start start-arm stop stop-arm rm rm-arm release release-arm
 
