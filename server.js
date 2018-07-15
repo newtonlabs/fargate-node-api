@@ -6,7 +6,8 @@ const request = require('request-promise');
 
 const PORT = 8080;
 const RULES_ADDR = 'http://rules.service';
-const RULES_PORT = 8080;
+// const RULES_ADDR = 'http://localhost';
+const RULES_PORT = 9090;
 const HOST = '0.0.0.0';
 const TIMEOUT = 1500;
 
@@ -53,7 +54,7 @@ app.get('/health', function(req, response, next) {
   rulesApi
     .healthCheck()
     .then(body => response.json(body))
-    .catch(err => response.json({'err': err}))
+    .catch(err => response.json({'msg': err}))
 });
 
 app.get('/rules', function(req, response, next) {
@@ -61,7 +62,10 @@ app.get('/rules', function(req, response, next) {
     .passingRule({})
     .then(rulesApi.blockingRule)
     .then(payload => response.json(payload))
-    .catch(err => response.json({'err': err}))
+    .catch(err => response.json({
+      'passing': {'msg': err.message},
+      'blocking': {'msg': err.message}
+    }));
 });
 
 app.listen(PORT, HOST);
