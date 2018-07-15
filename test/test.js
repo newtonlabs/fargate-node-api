@@ -7,7 +7,7 @@ chai.use(require('chai-http'));
 
 const app = require('../server.js'); // Our app
 
-describe('API endpoint /', function() {
+describe('API endpoint /hello', function() {
   this.timeout(5000); // How long to wait for a response (ms)
 
   before(function() {
@@ -21,7 +21,7 @@ describe('API endpoint /', function() {
   // GET - List all colors
   it('Return a basic payload', function() {
     return chai.request(app)
-      .get('/')
+      .get('/hello')
       .then(function(res) {
         expect(res).to.have.status(200);
         expect(res).to.be.json;
