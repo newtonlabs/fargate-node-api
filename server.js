@@ -2,9 +2,11 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const request = require('request');
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
+const TIMEOUT = 1500;
 
 const app = express();
 
@@ -13,8 +15,21 @@ app.use(bodyParser.json({
 }));
 
 app.get('/', function(req, res, next) {
-  res.json({'msg': 'Hello from the Node API deployed! --version from circle 2'})
-})
+  res.json({'msg': 'Hello from the Node API'})
+});
+
+app.get('/rec', function(req, response, next) {
+  request('http://rules.service:8080', { json: true, timeout: TIMEOUT }, (err, res, body) => {
+    if (err) {
+      console.log(err);
+      response.json({'err': err});
+    }
+    else {
+      console.log('call returned from rules engine', body);
+      response.json(body);
+    }
+  });
+});
 
 app.listen(PORT, HOST);
 
