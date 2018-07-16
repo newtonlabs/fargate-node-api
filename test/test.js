@@ -4,21 +4,14 @@ const chai = require('chai');
 const expect = require('chai').expect;
 
 chai.use(require('chai-http'));
-
-const app = require('../server.js'); // Our app
+const app = require('../server.js');
 
 describe('API endpoint /hello', function() {
-  this.timeout(5000); // How long to wait for a response (ms)
+  this.timeout(5000);
 
-  before(function() {
+  before(function() {});
+  after(function() {});
 
-  });
-
-  after(function() {
-
-  });
-
-  // GET - List all colors
   it('Return a basic payload', function() {
     return chai.request(app)
       .get('/hello')

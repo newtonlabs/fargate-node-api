@@ -16,7 +16,7 @@ const app = express();
 let rulesApi = {
   passingRule: function(payload) {
     return request({
-      "method":"GET",
+      "method": "GET",
       "uri": `${RULES_ADDR}:${RULES_PORT}/rule/600`,
       "json": true,
       "timeout": TIMEOUT,
@@ -27,7 +27,7 @@ let rulesApi = {
   },
   blockingRule: function(payload) {
     return request({
-      "method":"GET",
+      "method": "GET",
       "uri": `${RULES_ADDR}:${RULES_PORT}/rule/400`,
       "json": true,
       "timeout": TIMEOUT,
@@ -38,7 +38,7 @@ let rulesApi = {
   },
   healthCheck: function() {
     return request({
-      "method":"GET",
+      "method": "GET",
       "uri": `${RULES_ADDR}:${RULES_PORT}`,
       "json": true,
       "timeout": TIMEOUT,
@@ -47,32 +47,33 @@ let rulesApi = {
 }
 
 app.get('/hello', function(req, res, next) {
-  res.json({'msg': 'Hello from the Node API'})
+  res.json({
+    'msg': 'Hello from the Node API'
+  })
 });
 
 app.get('/health', function(req, response, next) {
-  rulesApi
-    .healthCheck()
+  rulesApi.healthCheck()
     .then(body => response.json(body))
-    .catch(err => response.json({'msg': err}))
+    .catch(err => response.json({
+      'msg': err
+    }))
 });
 
 app.get('/rules', function(req, response, next) {
-  rulesApi
-    .passingRule({})
+  rulesApi.passingRule({})
     .then(rulesApi.blockingRule)
     .then(payload => response.json(payload))
     .catch(err => response.json({
-      'passing': {'msg': err.message},
-      'blocking': {'msg': err.message}
+      'passing': {
+        'msg': err.message
+      },
+      'blocking': {
+        'msg': err.message
+      }
     }));
 });
 
 app.listen(PORT, HOST);
-
 console.log('Listening on http://%s:%d', HOST || '*', PORT);
-
-/**
- * Export the Express app so that it can be used by Chai
- */
 module.exports = app;
