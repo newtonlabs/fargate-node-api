@@ -53,6 +53,7 @@ app.get('/', function(req, res, next) {
 });
 
 app.get('/api/hello', function(req, res, next) {
+  console.log('API node is pinged');
   res.json({
     'msg': 'Hello from the Node API'
   })
