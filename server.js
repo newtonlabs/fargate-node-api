@@ -46,6 +46,12 @@ let rulesApi = {
   }
 }
 
+app.get('/', function(req, res, next) {
+  res.json({
+    'msg': 'Test with no namespace'
+  })
+});
+
 app.get('/api/hello', function(req, res, next) {
   res.json({
     'msg': 'Hello from the Node API'
