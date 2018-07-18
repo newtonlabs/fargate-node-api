@@ -46,13 +46,13 @@ let rulesApi = {
   }
 }
 
-app.get('/hello', function(req, res, next) {
+app.get('/api/hello', function(req, res, next) {
   res.json({
     'msg': 'Hello from the Node API'
   })
 });
 
-app.get('/health', function(req, response, next) {
+app.get('/api/health', function(req, response, next) {
   rulesApi.healthCheck()
     .then(body => response.json(body))
     .catch(err => response.json({
@@ -60,7 +60,7 @@ app.get('/health', function(req, response, next) {
     }))
 });
 
-app.get('/rules', function(req, response, next) {
+app.get('/api/rules', function(req, response, next) {
   rulesApi.passingRule({})
     .then(rulesApi.blockingRule)
     .then(payload => response.json(payload))
